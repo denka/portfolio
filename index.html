@@ -188,23 +188,6 @@
         </section>
 
         <section class="section">
-          <div class="section-label">Recognition</div>
-
-          <div class="award-item">
-            <div class="award-title">2nd Place — Ecuador Hackathon</div>
-            <div class="award-detail">First national hackathon · 2011</div>
-          </div>
-          <div class="award-item">
-            <div class="award-title">2nd Place — Stanford Innovation Tournament</div>
-            <div class="award-detail">2008</div>
-          </div>
-          <div class="award-item">
-            <div class="award-title">Equity &amp; Excellence Scholarship</div>
-            <div class="award-detail">Awarded 2007–2008</div>
-          </div>
-        </section>
-
-        <section class="section">
           <div class="section-label">Speaking &amp; Teaching</div>
 
           <div class="speak-item">Flisol 2017 — Ruby on Rails vs. Java</div>
@@ -215,6 +198,14 @@
 
       </aside>
     </div>
+    <section class="section">
+      <div class="section-label">Github Contributions</div>
+      <div class="contributions-container">
+        <a href="https://github.com/denka" target="_blank" rel="noopener">
+          <img src="https://ghchart.rshah.org/c84b2f/denka" alt="denka's GitHub Contributions Chart" />
+        </a>
+      </div>
+    </section>
   </div>
 
   <footer>Denisse A. Wehner · Senior Software Engineer · 2026</footer>
@@ -231,6 +222,64 @@
     }, { threshold: 0.1 });
 
     jobs.forEach(job => observer.observe(job));
+
+    async function fetchGitHubActivity() {
+      const container = document.getElementById('github-activity');
+      const username = 'denka';
+
+      try {
+        const response = await fetch(`https://api.github.com/users/${username}/events/public`);
+        if (!response.ok) throw new Error('Failed to fetch activity');
+
+        const data = await response.json();
+        const events = data.slice(0, 5);
+
+        if (events.length === 0) {
+          container.innerHTML = '<div class="empty-state">No recent activity</div>';
+          return;
+        }
+
+        container.innerHTML = '';
+        events.forEach(event => {
+          const item = document.createElement('div');
+          item.className = 'activity-item';
+
+          let action = '';
+          const repoName = event.repo.name.replace(`${username}/`, '');
+
+          switch (event.type) {
+            case 'PushEvent':
+              action = `Pushed to <span class="activity-repo">${repoName}</span>`;
+              break;
+            case 'CreateEvent':
+              action = `Created ${event.payload.ref_type} in <span class="activity-repo">${repoName}</span>`;
+              break;
+            case 'WatchEvent':
+              action = `Starred <span class="activity-repo">${repoName}</span>`;
+              break;
+            case 'PullRequestEvent':
+              action = `${event.payload.action === 'opened' ? 'Opened' : 'Closed'} PR in <span class="activity-repo">${repoName}</span>`;
+              break;
+            default:
+              action = `Activity in <span class="activity-repo">${repoName}</span>`;
+          }
+
+          const date = new Date(event.created_at);
+          const formattedDate = date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+
+          item.innerHTML = `
+            <div class="activity-title">${action}</div>
+            <div class="activity-date">${formattedDate}</div>
+          `;
+          container.appendChild(item);
+        });
+      } catch (error) {
+        console.error('Error fetching GitHub activity:', error);
+        container.innerHTML = '<div class="error-state">Activity feed unavailable</div>';
+      }
+    }
+
+    fetchGitHubActivity();
   </script>
 </body>
 

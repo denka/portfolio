@@ -1,559 +1,627 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Denisse A. Wehner — Senior Software Engineer</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Denisse A. Wehner — Senior Software Engineer</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,wght@0,300;0,400;1,300&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  :root {
-    --ink: #1a1a18;
-    --cream: #f5f0e8;
-    --warm: #e8e0d0;
-    --accent: #c84b2f;
-    --gold: #b8965a;
-    --muted: #7a746a;
-    --line: rgba(26,26,24,0.12);
-  }
+    :root {
+      --ink: #1a1a18;
+      --cream: #f5f0e8;
+      --warm: #e8e0d0;
+      --accent: #c84b2f;
+      --gold: #b8965a;
+      --muted: #7a746a;
+      --line: rgba(26, 26, 24, 0.12);
+    }
 
-  html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-  body {
-    background: var(--cream);
-    color: var(--ink);
-    font-family: 'DM Mono', monospace;
-    font-size: 13px;
-    line-height: 1.7;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-  /* Grain overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1000;
-    opacity: 0.5;
-  }
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.5;
+    }
 
-  /* ── HEADER ── */
-  header {
-    position: relative;
-    padding: 80px 60px 60px;
-    border-bottom: 1px solid var(--line);
-    overflow: hidden;
-    background: var(--ink);
-    color: var(--cream);
-  }
+    /* ── HEADER ── */
+    header {
+      position: relative;
+      padding: 80px 60px 60px;
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+      background: var(--ink);
+      color: var(--cream);
+    }
 
-  header::after {
-    content: '';
-    position: absolute;
-    bottom: -1px; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--accent) 0%, var(--gold) 50%, transparent 100%);
-  }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--gold) 50%, transparent 100%);
+    }
 
-  .header-grid {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 40px;
-    align-items: end;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
+    .header-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: end;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
 
-  .header-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 16px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.1s;
-  }
+    .header-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.1s;
+    }
 
-  h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(42px, 7vw, 80px);
-    font-weight: 400;
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-    color: var(--cream);
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.2s;
-  }
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(42px, 7vw, 80px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--cream);
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.2s;
+    }
 
-  h1 em {
-    font-style: italic;
-    color: var(--gold);
-  }
+    h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
 
-  .header-subtitle {
-    font-family: 'Fraunces', serif;
-    font-size: 16px;
-    font-weight: 300;
-    color: rgba(245,240,232,0.65);
-    margin-top: 16px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.35s;
-  }
+    .header-subtitle {
+      font-family: 'Fraunces', serif;
+      font-size: 16px;
+      font-weight: 300;
+      color: rgba(245, 240, 232, 0.65);
+      margin-top: 16px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.35s;
+    }
 
-  .contact-block {
-    text-align: right;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.4s;
-  }
+    .contact-block {
+      text-align: right;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.4s;
+    }
 
-  .contact-block a, .contact-block span {
-    display: block;
-    font-size: 11px;
-    color: rgba(245,240,232,0.6);
-    text-decoration: none;
-    letter-spacing: 0.05em;
-    margin-bottom: 4px;
-    transition: color 0.2s;
-  }
+    .contact-block a,
+    .contact-block span {
+      display: block;
+      font-size: 11px;
+      color: rgba(245, 240, 232, 0.6);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+      transition: color 0.2s;
+    }
 
-  .contact-block a:hover { color: var(--gold); }
+    .contact-block a:hover {
+      color: var(--gold);
+    }
 
-  /* ── LAYOUT ── */
-  .main-wrap {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 60px 100px;
-  }
+    /* ── LAYOUT ── */
+    .main-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 60px 100px;
+    }
 
-  .two-col {
-    display: grid;
-    grid-template-columns: 1fr 320px;
-    gap: 60px;
-    margin-top: 60px;
-  }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 60px;
+      margin-top: 60px;
+    }
 
-  /* ── SECTIONS ── */
-  .section { margin-bottom: 52px; }
+    /* ── SECTIONS ── */
+    .section {
+      margin-bottom: 52px;
+    }
 
-  .section-label {
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--line);
-  }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
 
-  /* ── SUMMARY ── */
-  .summary-text {
-    font-family: 'Fraunces', serif;
-    font-size: 17px;
-    font-weight: 300;
-    line-height: 1.75;
-    color: var(--ink);
-    border-left: 2px solid var(--gold);
-    padding-left: 20px;
-  }
+    /* ── SUMMARY ── */
+    .summary-text {
+      font-family: 'Fraunces', serif;
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--ink);
+      border-left: 2px solid var(--gold);
+      padding-left: 20px;
+    }
 
-  /* ── EXPERIENCE ── */
-  .job {
-    padding: 24px 0;
-    border-bottom: 1px solid var(--line);
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
+    /* ── EXPERIENCE ── */
+    .job {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
 
-  .job.visible { opacity: 1; transform: translateY(0); }
+    .job.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-  .job-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-bottom: 4px;
-  }
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
 
-  .job-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 18px;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-  }
+    .job-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
 
-  .job-period {
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    white-space: nowrap;
-  }
+    .job-period {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      white-space: nowrap;
+    }
 
-  .job-company {
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
+    .job-company {
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
 
-  .job-location {
-    color: var(--muted);
-    font-weight: 300;
-  }
+    .job-location {
+      color: var(--muted);
+      font-weight: 300;
+    }
 
-  .job-bullets { list-style: none; padding: 0; }
+    .job-bullets {
+      list-style: none;
+      padding: 0;
+    }
 
-  .job-bullets li {
-    padding: 4px 0 4px 18px;
-    position: relative;
-    color: #3a3a38;
-    font-size: 12.5px;
-    line-height: 1.6;
-  }
+    .job-bullets li {
+      padding: 4px 0 4px 18px;
+      position: relative;
+      color: #3a3a38;
+      font-size: 12.5px;
+      line-height: 1.6;
+    }
 
-  .job-bullets li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: var(--gold);
-    font-size: 11px;
-  }
+    .job-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 11px;
+    }
 
-  .bullet-lead {
-    font-weight: 500;
-    color: var(--ink);
-  }
+    .bullet-lead {
+      font-weight: 500;
+      color: var(--ink);
+    }
 
-  /* ── SIDEBAR ── */
-  .sidebar .section { margin-bottom: 40px; }
+    /* ── SIDEBAR ── */
+    .sidebar .section {
+      margin-bottom: 40px;
+    }
 
-  .skill-group { margin-bottom: 16px; }
+    .skill-group {
+      margin-bottom: 16px;
+    }
 
-  .skill-group-name {
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 8px;
-  }
+    .skill-group-name {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
 
-  .skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
 
-  .tag {
-    background: var(--warm);
-    border: 1px solid var(--line);
-    padding: 4px 10px;
-    font-size: 11px;
-    letter-spacing: 0.03em;
-    border-radius: 2px;
-    transition: background 0.2s, border-color 0.2s;
-  }
+    .tag {
+      background: var(--warm);
+      border: 1px solid var(--line);
+      padding: 4px 10px;
+      font-size: 11px;
+      letter-spacing: 0.03em;
+      border-radius: 2px;
+      transition: background 0.2s, border-color 0.2s;
+    }
 
-  .tag:hover {
-    background: var(--ink);
-    color: var(--cream);
-    border-color: var(--ink);
-  }
+    .tag:hover {
+      background: var(--ink);
+      color: var(--cream);
+      border-color: var(--ink);
+    }
 
-  .tag.highlight {
-    background: var(--accent);
-    color: white;
-    border-color: var(--accent);
-  }
+    .tag.highlight {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
 
-  /* ── EDUCATION ── */
-  .edu-item { margin-bottom: 20px; }
+    /* ── EDUCATION ── */
+    .edu-item {
+      margin-bottom: 20px;
+    }
 
-  .edu-degree {
-    font-family: 'DM Serif Display', serif;
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 1.3;
-  }
+    .edu-degree {
+      font-family: 'DM Serif Display', serif;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.3;
+    }
 
-  .edu-school {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 2px;
-  }
+    .edu-school {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
 
-  .edu-year {
-    font-size: 10px;
-    color: var(--gold);
-    margin-top: 2px;
-    letter-spacing: 0.1em;
-  }
+    .edu-year {
+      font-size: 10px;
+      color: var(--gold);
+      margin-top: 2px;
+      letter-spacing: 0.1em;
+    }
 
-  /* ── AWARDS ── */
-  .award-item {
-    padding: 10px 0;
-    border-bottom: 1px solid var(--line);
-    font-size: 12px;
-  }
+    /* ── AWARDS ── */
+    .award-item {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 12px;
+    }
 
-  .award-item:last-child { border-bottom: none; }
+    .award-item:last-child {
+      border-bottom: none;
+    }
 
-  .award-title {
-    font-weight: 500;
-    color: var(--ink);
-  }
+    .award-title {
+      font-weight: 500;
+      color: var(--ink);
+    }
 
-  .award-detail {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 2px;
-  }
+    .award-detail {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
 
-  /* ── SPEAKING ── */
-  .speak-item {
-    font-size: 12px;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .speak-item:last-child { border-bottom: none; }
+    /* ── SPEAKING ── */
+    .speak-item {
+      font-size: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+    }
 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--ink);
-    color: rgba(245,240,232,0.4);
-    text-align: center;
-    padding: 24px;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-  }
+    .speak-item:last-child {
+      border-bottom: none;
+    }
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: rgba(245, 240, 232, 0.4);
+      text-align: center;
+      padding: 24px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+    }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 800px) {
-    header { padding: 50px 24px 40px; }
-    .header-grid { grid-template-columns: 1fr; }
-    .contact-block { text-align: left; }
-    .main-wrap { padding: 0 24px 80px; }
-    .two-col { grid-template-columns: 1fr; gap: 0; }
-  }
-</style>
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 800px) {
+      header {
+        padding: 50px 24px 40px;
+      }
+
+      .header-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-block {
+        text-align: left;
+      }
+
+      .main-wrap {
+        padding: 0 24px 80px;
+      }
+
+      .two-col {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<header>
-  <div class="header-grid">
-    <div>
-      <div class="header-label">Senior Software Engineer · 12+ Years</div>
-      <h1>Denisse<br><em>Wehner</em></h1>
-      <p class="header-subtitle">Full-Stack · Ruby on Rails · React · Digital Security</p>
+  <header>
+    <div class="header-grid">
+      <div>
+        <div class="header-label">Senior Software Engineer · 12+ Years</div>
+        <h1>Denisse<br><em>Wehner</em></h1>
+        <p class="header-subtitle">Full-Stack · Ruby on Rails · React · Digital Security</p>
+      </div>
+      <div class="contact-block">
+        <span>Cocoa Beach, FL</span>
+      </div>
     </div>
-    <div class="contact-block">
-      <span>Cocoa Beach, FL 32931</span>
-      <a href="tel:9543301382">(954) 330-1382</a>
-      <a href="mailto:denisse.cayetano@gmail.com">denisse.cayetano@gmail.com</a>
+  </header>
+
+  <div class="main-wrap">
+    <div class="two-col">
+      <main>
+
+        <section class="section">
+          <div class="section-label">Profile</div>
+          <p class="summary-text">
+            Accomplished Senior Software Engineer specializing in Ruby on Rails, React, and system architecture —
+            dedicated to leading teams toward high-quality, scalable software with a positive human impact. Master's in
+            Digital Security.
+          </p>
+        </section>
+
+        <section class="section">
+          <div class="section-label">Experience</div>
+
+          <div class="job">
+            <div class="job-header">
+              <span class="job-title">Senior Software Engineer</span>
+              <span class="job-period">Mar 2014 — Present</span>
+            </div>
+            <div class="job-company">Stay Healthy Zone, LLC <span class="job-location">· Remote, Plantation FL</span>
+            </div>
+            <ul class="job-bullets">
+              <li><span class="bullet-lead">Technical Leadership:</span> Mentored junior developers through code reviews
+                and workshops, improving team velocity and codebase quality.</li>
+              <li><span class="bullet-lead">System Modernization:</span> Led full-stack migration from Java/Backbone.js
+                to Ruby on Rails/React, boosting developer productivity and responsiveness.</li>
+              <li><span class="bullet-lead">Data-Driven Personalization:</span> Architected a personalized meal-planning
+                engine and habit-tracking suite using user profile data to drive daily engagement.</li>
+              <li><span class="bullet-lead">Full SDLC Ownership:</span> Managed feature lifecycle from requirements and
+                system design through implementation, testing, and cloud deployment.</li>
+              <li><span class="bullet-lead">Performance Engineering:</span> Optimized query execution and resolved
+                system bottlenecks to reduce latency and improve database efficiency.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="job-header">
+              <span class="job-title">Software Engineer</span>
+              <span class="job-period">Mar 2013 — Mar 2014</span>
+            </div>
+            <div class="job-company">Centronet Marketing, LLC <span class="job-location">· Margate, FL</span></div>
+            <ul class="job-bullets">
+              <li><span class="bullet-lead">System Design:</span> Designed and implemented features for a GIS-oriented
+                web application in Ruby on Rails.</li>
+              <li><span class="bullet-lead">Geospatial Data:</span> Utilized PostgreSQL and PostGIS to optimize routing
+                algorithms for moving company quotes.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="job-header">
+              <span class="job-title">Software Engineer</span>
+              <span class="job-period">Sep 2010 — Apr 2013</span>
+            </div>
+            <div class="job-company">Pentalogix, LLC <span class="job-location">· Remote, Portland OR</span></div>
+            <ul class="job-bullets">
+              <li><span class="bullet-lead">E-commerce:</span> Implemented features for an e-commerce site using OS
+                Commerce (PHP, JavaScript, MySQL).</li>
+              <li><span class="bullet-lead">Modernization:</span> Initiated migration from OS Commerce to Spree (Ruby on
+                Rails).</li>
+              <li><span class="bullet-lead">Operations:</span> Managed email campaigns, landing pages, and utilization
+                reporting.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="job-header">
+              <span class="job-title">Research Assistant</span>
+              <span class="job-period">Oct 2009 — Aug 2010</span>
+            </div>
+            <div class="job-company">CTI – ESPOL <span class="job-location">· Guayaquil, Ecuador</span></div>
+            <ul class="job-bullets">
+              <li><span class="bullet-lead">Accessibility:</span> Part of the team that built "Jossie," a CMS focused on
+                accessibility for visually impaired users.</li>
+              <li><span class="bullet-lead">Collaboration:</span> Member of the LACLO research group on recommendation
+                systems for scientific content.</li>
+            </ul>
+          </div>
+
+        </section>
+      </main>
+
+      <aside class="sidebar">
+
+        <section class="section">
+          <div class="section-label">Skills</div>
+
+          <div class="skill-group">
+            <div class="skill-group-name">Languages</div>
+            <div class="skill-tags">
+              <span class="tag highlight">Ruby</span>
+              <span class="tag highlight">JavaScript</span>
+              <span class="tag">Java</span>
+              <span class="tag">PHP</span>
+              <span class="tag">Python</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-name">Frameworks</div>
+            <div class="skill-tags">
+              <span class="tag highlight">Ruby on Rails</span>
+              <span class="tag highlight">React</span>
+              <span class="tag">Backbone.js</span>
+              <span class="tag">Spree</span>
+              <span class="tag">OS Commerce</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-name">Databases</div>
+            <div class="skill-tags">
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">PostGIS</span>
+              <span class="tag">MySQL</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-name">Specializations</div>
+            <div class="skill-tags">
+              <span class="tag">Digital Security</span>
+              <span class="tag">GIS Systems</span>
+              <span class="tag">E-commerce</span>
+              <span class="tag">Web Accessibility</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-label">Education</div>
+
+          <div class="edu-item">
+            <div class="edu-degree">MS Digital Security</div>
+            <div class="edu-school">Escuela Superior Politécnica del Litoral (ESPOL)</div>
+            <div class="edu-year">2016 · Guayaquil, Ecuador</div>
+          </div>
+
+          <div class="edu-item">
+            <div class="edu-degree">Computer Engineer</div>
+            <div class="edu-school">Escuela Superior Politécnica del Litoral (ESPOL)</div>
+            <div class="edu-year">2009 · Guayaquil, Ecuador</div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-label">Recognition</div>
+
+          <div class="award-item">
+            <div class="award-title">2nd Place — Ecuador Hackathon</div>
+            <div class="award-detail">First national hackathon · 2011</div>
+          </div>
+          <div class="award-item">
+            <div class="award-title">2nd Place — Stanford Innovation Tournament</div>
+            <div class="award-detail">2008</div>
+          </div>
+          <div class="award-item">
+            <div class="award-title">Equity &amp; Excellence Scholarship</div>
+            <div class="award-detail">Awarded 2007–2008</div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-label">Speaking &amp; Teaching</div>
+
+          <div class="speak-item">Flisol 2017 — Ruby on Rails vs. Java</div>
+          <div class="speak-item">Women in Science &amp; Technology (WIE IEEE)</div>
+          <div class="speak-item">Workshop: Scripting the Web (15 hrs)</div>
+          <div class="speak-item">Workshop: Agile Programming with Rails</div>
+        </section>
+
+      </aside>
     </div>
   </div>
-</header>
 
-<div class="main-wrap">
-  <div class="two-col">
+  <footer>Denisse A. Wehner · Senior Software Engineer · 2026</footer>
 
-    <!-- LEFT COLUMN -->
-    <main>
+  <script>
+    const jobs = document.querySelectorAll('.job');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
 
-      <section class="section">
-        <div class="section-label">Profile</div>
-        <p class="summary-text">
-          Accomplished Senior Software Engineer specializing in Ruby on Rails, React, and system architecture — dedicated to leading teams toward high-quality, scalable software with a positive human impact. Master's in Digital Security.
-        </p>
-      </section>
-
-      <section class="section">
-        <div class="section-label">Experience</div>
-
-        <div class="job">
-          <div class="job-header">
-            <span class="job-title">Senior Software Engineer</span>
-            <span class="job-period">Mar 2014 — Present</span>
-          </div>
-          <div class="job-company">Stay Healthy Zone, LLC <span class="job-location">· Remote, Plantation FL</span></div>
-          <ul class="job-bullets">
-            <li><span class="bullet-lead">Technical Leadership:</span> Mentored junior developers through code reviews and workshops, improving team velocity and codebase quality.</li>
-            <li><span class="bullet-lead">System Modernization:</span> Led full-stack migration from Java/Backbone.js to Ruby on Rails/React, boosting developer productivity and responsiveness.</li>
-            <li><span class="bullet-lead">Data-Driven Personalization:</span> Architected a personalized meal-planning engine and habit-tracking suite using user profile data to drive daily engagement.</li>
-            <li><span class="bullet-lead">Full SDLC Ownership:</span> Managed feature lifecycle from requirements and system design through implementation, testing, and cloud deployment.</li>
-            <li><span class="bullet-lead">Performance Engineering:</span> Optimized query execution and resolved system bottlenecks to reduce latency and improve database efficiency.</li>
-          </ul>
-        </div>
-
-        <div class="job">
-          <div class="job-header">
-            <span class="job-title">Software Engineer</span>
-            <span class="job-period">Mar 2013 — Mar 2014</span>
-          </div>
-          <div class="job-company">Centronet Marketing, LLC <span class="job-location">· Margate, FL</span></div>
-          <ul class="job-bullets">
-            <li><span class="bullet-lead">System Design:</span> Designed and implemented features for a GIS-oriented web application in Ruby on Rails.</li>
-            <li><span class="bullet-lead">Geospatial Data:</span> Utilized PostgreSQL and PostGIS to optimize routing algorithms for moving company quotes.</li>
-          </ul>
-        </div>
-
-        <div class="job">
-          <div class="job-header">
-            <span class="job-title">Software Engineer</span>
-            <span class="job-period">Sep 2010 — Apr 2013</span>
-          </div>
-          <div class="job-company">Pentalogix, LLC <span class="job-location">· Remote, Portland OR</span></div>
-          <ul class="job-bullets">
-            <li><span class="bullet-lead">E-commerce:</span> Implemented features for an e-commerce site using OS Commerce (PHP, JavaScript, MySQL).</li>
-            <li><span class="bullet-lead">Modernization:</span> Initiated migration from OS Commerce to Spree (Ruby on Rails).</li>
-            <li><span class="bullet-lead">Operations:</span> Managed email campaigns, landing pages, and utilization reporting.</li>
-          </ul>
-        </div>
-
-        <div class="job">
-          <div class="job-header">
-            <span class="job-title">Research Assistant</span>
-            <span class="job-period">Oct 2009 — Aug 2010</span>
-          </div>
-          <div class="job-company">CTI – ESPOL <span class="job-location">· Guayaquil, Ecuador</span></div>
-          <ul class="job-bullets">
-            <li><span class="bullet-lead">Accessibility:</span> Part of the team that built "Jossie," a CMS focused on accessibility for visually impaired users.</li>
-            <li><span class="bullet-lead">Collaboration:</span> Member of the LACLO research group on recommendation systems for scientific content.</li>
-          </ul>
-        </div>
-
-      </section>
-    </main>
-
-    <!-- RIGHT COLUMN (SIDEBAR) -->
-    <aside class="sidebar">
-
-      <section class="section">
-        <div class="section-label">Skills</div>
-
-        <div class="skill-group">
-          <div class="skill-group-name">Languages</div>
-          <div class="skill-tags">
-            <span class="tag highlight">Ruby</span>
-            <span class="tag highlight">JavaScript</span>
-            <span class="tag">Java</span>
-            <span class="tag">PHP</span>
-            <span class="tag">Python</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <div class="skill-group-name">Frameworks</div>
-          <div class="skill-tags">
-            <span class="tag highlight">Ruby on Rails</span>
-            <span class="tag highlight">React</span>
-            <span class="tag">Backbone.js</span>
-            <span class="tag">Spree</span>
-            <span class="tag">OS Commerce</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <div class="skill-group-name">Databases</div>
-          <div class="skill-tags">
-            <span class="tag">PostgreSQL</span>
-            <span class="tag">PostGIS</span>
-            <span class="tag">MySQL</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <div class="skill-group-name">Specializations</div>
-          <div class="skill-tags">
-            <span class="tag">Digital Security</span>
-            <span class="tag">GIS Systems</span>
-            <span class="tag">E-commerce</span>
-            <span class="tag">Web Accessibility</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-label">Education</div>
-
-        <div class="edu-item">
-          <div class="edu-degree">MS Digital Security</div>
-          <div class="edu-school">Escuela Superior Politécnica del Litoral (ESPOL)</div>
-          <div class="edu-year">2016 · Guayaquil, Ecuador</div>
-        </div>
-
-        <div class="edu-item">
-          <div class="edu-degree">Computer Engineer</div>
-          <div class="edu-school">Escuela Superior Politécnica del Litoral (ESPOL)</div>
-          <div class="edu-year">2009 · Guayaquil, Ecuador</div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-label">Recognition</div>
-
-        <div class="award-item">
-          <div class="award-title">2nd Place — Ecuador Hackathon</div>
-          <div class="award-detail">First national hackathon · 2011</div>
-        </div>
-        <div class="award-item">
-          <div class="award-title">2nd Place — Stanford Innovation Tournament</div>
-          <div class="award-detail">2008</div>
-        </div>
-        <div class="award-item">
-          <div class="award-title">Equity &amp; Excellence Scholarship</div>
-          <div class="award-detail">Awarded 2007–2008</div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-label">Speaking &amp; Teaching</div>
-
-        <div class="speak-item">Flisol 2017 — Ruby on Rails vs. Java</div>
-        <div class="speak-item">Women in Science &amp; Technology (WIE IEEE)</div>
-        <div class="speak-item">Workshop: Scripting the Web (15 hrs)</div>
-        <div class="speak-item">Workshop: Agile Programming with Rails</div>
-      </section>
-
-    </aside>
-  </div>
-</div>
-
-<footer>Denisse A. Wehner · Senior Software Engineer · 2026</footer>
-
-<script>
-  // Scroll-triggered fade-in for job items
-  const jobs = document.querySelectorAll('.job');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  jobs.forEach(job => observer.observe(job));
-</script>
+    jobs.forEach(job => observer.observe(job));
+  </script>
 </body>
+
 </html>
